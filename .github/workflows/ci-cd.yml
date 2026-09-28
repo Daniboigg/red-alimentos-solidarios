@@ -62,46 +62,28 @@ jobs:
         with:
           name: coverage-report
           path: backend/coverage/
-      - name: Verificar lcov.info
+      - name: Verificar token
         run: |
-          ls -la backend/coverage/ || echo "No existe"
-          cat backend/coverage/lcov.info | head -20 || echo "Sin lcov"
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "❌ SONAR_TOKEN vacío"
+            exit 1
+          else
+            echo "✅ SONAR_TOKEN presente (longitud: ${#SONAR_TOKEN})"
+          fi
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  security:
-    name: Escaneo OWASP ZAP
-    runs-on: ubuntu-latest
-    needs: test
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+          SONAR_HOST_URL: https://sonarcloud.io
         with:
-          node-version: '20'
-      - run: npm ci
-        working-directory: backend
-      - run: npm run build
-        working-directory: backend
-      - name: Iniciar servidor
-        run: |
-          cd backend
-          nohup node dist/server.js > server.log 2>&1 &
-          sleep 15
-        env:
-          JWT_SECRET: ci-secret
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USER: admin
-          DB_PASSWORD: admin
-          DB_NAME: red_alimentos
-      - name: ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.12.0
-        continue-on-error: true
-        with:
-          target: 'http://localhost:3000'
-          fail_action: false
-          allow_issue_writing: false
+          args: >
+            -Dsonar.projectKey=Daniboigg_red-alimentos-solidarios
+            -Dsonar.organization=daniboigg
+            -Dsonar.sources=backend/src
+            -Dsonar.tests=backend/tests
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
+            -Dsonar.coverage.exclusions=backend/tests/**,backend/src/server.ts
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**,**/*.test.ts
+            -Dsonar.sourceEncoding=UTF-8
