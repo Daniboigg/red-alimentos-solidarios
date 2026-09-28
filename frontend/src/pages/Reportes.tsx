@@ -7,11 +7,13 @@ import {
 import { donationsService } from '../services/donationsService';
 import { StatCard } from '../components/ui/StatCard';
 import { Card } from '../components/ui/Card';
+import { useTheme } from '../context/ThemeContext';
 import type { KPIReporte, Donacion } from '../types';
 
 const COLORES_PIE = ['#0ea5e9', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
 
 export function Reportes() {
+  const { tema } = useTheme();
   const [kpis, setKpis] = useState<KPIReporte | null>(null);
   const [donaciones, setDonaciones] = useState<Donacion[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,15 +53,20 @@ export function Reportes() {
     }, {} as Record<string, number>)
   ).map(([name, value]) => ({ name, value }));
 
+  const textoEje = tema === 'dark' ? '#94a3b8' : '#64748b';
+  const lineaGrid = tema === 'dark' ? '#334155' : '#e2e8f0';
+  const tooltipBg = tema === 'dark' ? '#1e293b' : '#ffffff';
+  const tooltipBorder = tema === 'dark' ? '#334155' : '#e2e8f0';
+
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary-100 rounded-lg text-primary-600">
+        <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg text-primary-600 dark:text-primary-400">
           <BarChart3 className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">Reportes de Impacto</h1>
-          <p className="text-slate-500">Análisis de tu contribución social</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Reportes de Impacto</h1>
+          <p className="text-slate-500 dark:text-slate-400">Análisis de tu contribución social</p>
         </div>
       </div>
 
@@ -75,10 +82,17 @@ export function Reportes() {
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
               <BarChart data={datosPorTipo}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="name" stroke="#64748b" fontSize={12} />
-                <YAxis stroke="#64748b" fontSize={12} />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke={lineaGrid} />
+                <XAxis dataKey="name" stroke={textoEje} fontSize={12} />
+                <YAxis stroke={textoEje} fontSize={12} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: tooltipBg,
+                    border: `1px solid ${tooltipBorder}`,
+                    borderRadius: '8px',
+                    color: tema === 'dark' ? '#f1f5f9' : '#1e293b'
+                  }}
+                />
                 <Bar dataKey="kg" fill="#0ea5e9" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -102,8 +116,17 @@ export function Reportes() {
                     <Cell key={entry.name} fill={COLORES_PIE[index % COLORES_PIE.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
-                <Legend />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: tooltipBg,
+                    border: `1px solid ${tooltipBorder}`,
+                    borderRadius: '8px',
+                    color: tema === 'dark' ? '#f1f5f9' : '#1e293b'
+                  }}
+                />
+                <Legend
+                  wrapperStyle={{ color: tema === 'dark' ? '#f1f5f9' : '#1e293b' }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>

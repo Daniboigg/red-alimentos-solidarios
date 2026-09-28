@@ -38,10 +38,10 @@ export function Dashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-slate-800">
+        <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">
           Bienvenido, {usuario?.nombre}
         </h1>
-        <p className="text-slate-500 mt-1">
+        <p className="text-slate-500 dark:text-slate-400 mt-1">
           Aquí está el resumen de tu actividad en la red
         </p>
       </div>
@@ -94,39 +94,39 @@ export function Dashboard() {
           <div className="space-y-3">
             <Link
               to="/donaciones/nueva"
-              className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-colors"
+              className="flex items-center gap-3 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-primary-500 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-slate-800 transition-colors"
             >
-              <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
+              <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg text-primary-600 dark:text-primary-400">
                 <PlusCircle className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-medium text-slate-800">Nueva donación</p>
-                <p className="text-sm text-slate-500">Publica un excedente</p>
+                <p className="font-medium text-slate-800 dark:text-slate-100">Nueva donación</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Publica un excedente</p>
               </div>
             </Link>
             <Link
               to="/reportes"
-              className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-colors"
+              className="flex items-center gap-3 p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-primary-500 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-slate-800 transition-colors"
             >
-              <div className="p-2 bg-green-100 rounded-lg text-green-600">
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400">
                 <TrendingUp className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-medium text-slate-800">Ver reportes</p>
-                <p className="text-sm text-slate-500">Analiza tu impacto</p>
+                <p className="font-medium text-slate-800 dark:text-slate-100">Ver reportes</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Analiza tu impacto</p>
               </div>
             </Link>
           </div>
         </Card>
 
         <Card title="Sobre el proyecto">
-          <p className="text-slate-600 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             Red de Alimentos Solidarios conecta empresas con excedentes alimenticios
             con organizaciones sociales que los necesitan. Cada donación se rastrea
             para garantizar transparencia y maximizar el impacto social.
           </p>
-          <div className="mt-4 p-4 bg-primary-50 rounded-lg">
-            <p className="text-sm text-primary-700">
+          <div className="mt-4 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
+            <p className="text-sm text-primary-700 dark:text-primary-300">
               🌱 Tu participación ayuda a reducir el desperdicio de alimentos y a
               combatir la inseguridad alimentaria.
             </p>

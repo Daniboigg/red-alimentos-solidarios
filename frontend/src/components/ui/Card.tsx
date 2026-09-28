@@ -12,8 +12,8 @@ export function Card({ children, className = '', title, subtitle }: Props) {
     <div className={`card ${className}`}>
       {title && (
         <div className="mb-4">
-          <h3 className="text-lg font-semibold text-slate-800">{title}</h3>
-          {subtitle && <p className="text-sm text-slate-500 mt-1">{subtitle}</p>}
+          <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">{title}</h3>
+          {subtitle && <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{subtitle}</p>}
         </div>
       )}
       {children}

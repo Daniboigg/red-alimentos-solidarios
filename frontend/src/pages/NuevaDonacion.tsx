@@ -46,15 +46,15 @@ export function NuevaDonacion() {
     <div className="max-w-2xl mx-auto space-y-6">
       <button
         onClick={() => navigate('/donaciones')}
-        className="flex items-center gap-2 text-slate-600 hover:text-primary-600 transition-colors"
+        className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Volver a donaciones
       </button>
 
       <div>
-        <h1 className="text-3xl font-bold text-slate-800">Nueva donación</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Nueva donación</h1>
+        <p className="text-slate-500 dark:text-slate-400 mt-1">
           Publica un excedente para que las organizaciones puedan solicitarlo
         </p>
       </div>
@@ -71,7 +71,7 @@ export function NuevaDonacion() {
           />
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Descripción
             </label>
             <textarea
@@ -86,7 +86,7 @@ export function NuevaDonacion() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Tipo de recurso
               </label>
               <select
@@ -101,7 +101,7 @@ export function NuevaDonacion() {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Unidad
               </label>
               <select
@@ -136,7 +136,7 @@ export function NuevaDonacion() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}

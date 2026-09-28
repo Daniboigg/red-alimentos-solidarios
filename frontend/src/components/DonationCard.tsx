@@ -10,11 +10,11 @@ export function DonationCard({ donacion }: Props) {
   return (
     <div className="card hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-3">
-        <h3 className="text-lg font-semibold text-slate-800">{donacion.titulo}</h3>
+        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">{donacion.titulo}</h3>
         <Badge estado={donacion.estado} />
       </div>
-      <p className="text-slate-600 text-sm mb-4">{donacion.descripcion}</p>
-      <div className="grid grid-cols-2 gap-3 text-sm text-slate-500">
+      <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">{donacion.descripcion}</p>
+      <div className="grid grid-cols-2 gap-3 text-sm text-slate-500 dark:text-slate-400">
         <div className="flex items-center gap-2">
           <Package className="w-4 h-4" />
           <span>{donacion.cantidad} {donacion.unidad}</span>
